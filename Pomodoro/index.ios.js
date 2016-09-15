@@ -16,20 +16,44 @@ import {
 class Pomodoro extends Component {
   constructor(props){
     super(props)
-    this.state = {timeLeft: 0}
+    this.state = {
+      timeLeft: 0,
+      timeRuning : false,
+      currentTime: 1500
+    }
   }
   toggleTimer(){
-    var currentTime = 1500 // 25 min
+    var currentTime = this.state.currentTime // 25 min
+    this.setState({
+      timeLeft: this.state.timeLeft,
+      timeRuning : !this.state.timeRuning,
+      currentTime: this.state.currentTime
+    })
+
+    //TODO : Pass this into a helper
     var min = function(time){
       return Math.floor(time/60)
     }
     var seg = function(time){
       return time%60
     }
-
+    //TODO : Pass this into a helper
     setInterval(()=>{
-      currentTime--
-      this.setState({timeLeft: String(min(currentTime))+':'+String(seg(currentTime))})
+      var timeLeft = String(min(currentTime))+':'+String(seg(currentTime))
+      if (this.state.timeRuning != true){
+        this.setState({
+          timeLeft: timeLeft,
+          timeRuning : this.state.timeRuning,
+          currentTime: currentTime
+        })
+      } else {
+        currentTime--
+        this.setState({
+          timeLeft: timeLeft,
+          timeRuning : this.state.timeRuning,
+          currentTime: currentTime
+        })
+      }
 
     }, 1000)
 
