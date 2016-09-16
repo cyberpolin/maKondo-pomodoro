@@ -19,7 +19,7 @@ class Pomodoro extends Component {
     this.state = {
       timeLeft: 0,
       timeRuning : false,
-      currentTime: 1500
+      currentTime: 15000
     }
   }
   toggleTimer(){
@@ -30,38 +30,60 @@ class Pomodoro extends Component {
       currentTime: this.state.currentTime
     })
 
+
     //TODO : Pass this into a helper
     var min = function(time){
-      return Math.floor(time/60)
+
+      return doubleZero(Math.floor((time/60)))
     }
     var seg = function(time){
-      return time%60
+
+      console.log('----------------');
+      console.log(time%60)
+      console.log(doubleZero(time%60));
+      console.log('----------------');
+
+      return doubleZero(time%60)
+    }
+    var doubleZero = function(time){
+      if (time < 10){
+        time = '0' + time
+      }
+      return time
+    }
+
+    var formatTime = function(time){
+      time = time/10
+      time = time.toFixed(0)
+      // return time
+      return String(min(time))+':'+String(seg(time))
     }
     //TODO : Pass this into a helper
     setInterval(()=>{
-      var timeLeft = String(min(currentTime))+':'+String(seg(currentTime))
+      var timeLeft = formatTime(this.state.currentTime)
       if (this.state.timeRuning != true){
         this.setState({
-          timeLeft: timeLeft,
+          timeLeft: this.state.timeLeft,
           timeRuning : this.state.timeRuning,
-          currentTime: currentTime
+          currentTime: this.state.currentTime
         })
-      } else {
-        currentTime--
-        this.setState({
-          timeLeft: timeLeft,
-          timeRuning : this.state.timeRuning,
-          currentTime: currentTime
-        })
+        return
       }
+      currentTime--
+      this.setState({
+        timeLeft: timeLeft,
+        timeRuning : this.state.timeRuning,
+        currentTime: currentTime
+      })
 
-    }, 1000)
+
+    }, 100)
 
   }
   render() {
     return (
       <View style={styles.view}>
-        <CheckList/>
+        <CheckList state={this.state}/>
         <MainContainer time={this.state.timeLeft} toggleTimer={this.toggleTimer.bind(this)}/>
         <Adds/>
       </View>
@@ -72,7 +94,7 @@ class CheckList extends Component{
   render(){
     return(
       <View style={styles.checkList}>
-        <Text>check list </Text>
+        <Text>{JSON.stringify(this.props.state)}</Text>
       </View>
     )
   }
@@ -83,7 +105,7 @@ class MainContainer extends Component{
     return(
 
       <TouchableOpacity onPress={this.props.toggleTimer} style={styles.mainContainer}>
-        <Text>{String(this.props.time)}</Text>
+        <Text style={styles.time}>{String(this.props.time)}</Text>
       </TouchableOpacity>
     )
   }
@@ -124,6 +146,9 @@ const styles = StyleSheet.create({
     justifyContent: 'center',
     alignItems: 'center',
     backgroundColor: 'blue',
+  },
+  time:{
+    fontSize:50
   }
 });
 
