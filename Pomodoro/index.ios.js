@@ -14,14 +14,14 @@ import {
 } from 'react-native';
 import helpers from './helpers/helpers'
 
-const times = [50, 30]
+const times = [15000, 3000]
 // import * as Sound from 'react-native-simple-sound'
 var Sound = require('react-native-simple-sound');
 class Pomodoro extends Component {
   constructor(props){
     super(props)
     this.state = {
-      timeLeft: '25:00',
+      timeLeft: helpers.formatTime(times[0]),
       timeRuning : false,
       currentTime: times[0],
       counter: 0,
@@ -29,17 +29,23 @@ class Pomodoro extends Component {
   }
   toggleTimer(){
     var currentTime = this.state.currentTime // 25 min
-    this.setState({
-      timeLeft: this.state.timeLeft,
-      timeRuning : !this.state.timeRuning,
-      currentTime: this.state.currentTime
-    })
+
+    var state = this.state
+    state.timeRuning = !this.state.timeRuning
+    this.setState(state)
+
+    if (this.state.timeRuning == false){
+      clearInterval(interval)
+    }
 
 
 
-    setInterval(()=>{
+    var interval = setInterval(()=>{
+      if (this.state.timeRuning == false){
+        clearInterval(interval)
+      }
       var timeLeft = helpers.formatTime(this.state.currentTime)
-      if(this.state.currentTime <=0){
+      if(this.state.currentTime <0){
         Sound.enable(true)
         Sound.prepare('ring.mp3')
         Sound.play('ring.mp3')
@@ -47,16 +53,9 @@ class Pomodoro extends Component {
         state.counter = state.counter + 1
         state.timeRuning = false
         state.currentTime = times[state.counter%2]
-        state.timeLeft = 'jajaj'
-        this.state = state
+        state.timeRuning != this.state.timeRuning
+        this.setState(state)
         currentTime = this.state.currentTime
-        return
-      } else if (this.state.timeRuning != true){
-        this.setState({
-          timeLeft: this.state.timeLeft,
-          timeRuning : this.state.timeRuning,
-          currentTime: this.state.currentTime
-        })
         return
       }
       currentTime--
