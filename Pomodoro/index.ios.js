@@ -13,6 +13,9 @@ import {
   TouchableOpacity
 } from 'react-native';
 import helpers from './helpers/helpers'
+import { AdMobBanner, AdMobInterstitial } from 'react-native-admob'
+
+
 
 const times = [15000, 3000]
 // import * as Sound from 'react-native-simple-sound'
@@ -27,6 +30,7 @@ class Pomodoro extends Component {
       counter: 0,
     }
   }
+
   toggleTimer(){
     var currentTime = this.state.currentTime // 25 min
 
@@ -104,7 +108,13 @@ class Adds extends Component{
   render(){
     return(
       <View style={styles.adds}>
-        <Text>Beautiful money maker adds</Text>
+
+        <AdMobBanner style={styles.adds}
+          bannerSize="smartBannerPortrait"
+          adUnitID="ca-app-pub-4242008009100291/1926712041"
+          testDeviceID="EMULATOR"
+          didFailToReceiveAdWithError={this.bannerError} />
+
       </View>
     )
   }
