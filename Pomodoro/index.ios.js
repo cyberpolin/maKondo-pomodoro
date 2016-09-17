@@ -12,15 +12,20 @@ import {
   View,
   TouchableOpacity
 } from 'react-native';
-
+// import * as Sound from 'react-native-simple-sound'
+var Sound = require('react-native-simple-sound');
 class Pomodoro extends Component {
   constructor(props){
     super(props)
     this.state = {
-      timeLeft: 0,
+      timeLeft: '25:00',
       timeRuning : false,
       currentTime: 15000
     }
+  }
+
+  finishPomodoro(){
+
   }
   toggleTimer(){
     var currentTime = this.state.currentTime // 25 min
@@ -37,12 +42,6 @@ class Pomodoro extends Component {
       return doubleZero(Math.floor((time/60)))
     }
     var seg = function(time){
-
-      console.log('----------------');
-      console.log(time%60)
-      console.log(doubleZero(time%60));
-      console.log('----------------');
-
       return doubleZero(time%60)
     }
     var doubleZero = function(time){
@@ -61,6 +60,19 @@ class Pomodoro extends Component {
     //TODO : Pass this into a helper
     setInterval(()=>{
       var timeLeft = formatTime(this.state.currentTime)
+      if(this.state.currentTime <=0){
+        Sound.enable(true)
+        Sound.prepare('ring.mp3')
+        Sound.play('ring.mp3')
+        this.state = {
+          timeLeft: '25:00',
+          timeRuning : false,
+          currentTime: 15000
+        }
+        currentTime = this.state.currentTime
+        return
+      }
+
       if (this.state.timeRuning != true){
         this.setState({
           timeLeft: this.state.timeLeft,
