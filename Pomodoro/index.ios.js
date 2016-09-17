@@ -12,6 +12,9 @@ import {
   View,
   TouchableOpacity
 } from 'react-native';
+import helpers from './helpers/helpers'
+
+const times = [50, 30]
 // import * as Sound from 'react-native-simple-sound'
 var Sound = require('react-native-simple-sound');
 class Pomodoro extends Component {
@@ -20,12 +23,9 @@ class Pomodoro extends Component {
     this.state = {
       timeLeft: '25:00',
       timeRuning : false,
-      currentTime: 15000
+      currentTime: times[0],
+      counter: 0,
     }
-  }
-
-  finishPomodoro(){
-
   }
   toggleTimer(){
     var currentTime = this.state.currentTime // 25 min
@@ -36,44 +36,22 @@ class Pomodoro extends Component {
     })
 
 
-    //TODO : Pass this into a helper
-    var min = function(time){
 
-      return doubleZero(Math.floor((time/60)))
-    }
-    var seg = function(time){
-      return doubleZero(time%60)
-    }
-    var doubleZero = function(time){
-      if (time < 10){
-        time = '0' + time
-      }
-      return time
-    }
-
-    var formatTime = function(time){
-      time = time/10
-      time = time.toFixed(0)
-      // return time
-      return String(min(time))+':'+String(seg(time))
-    }
-    //TODO : Pass this into a helper
     setInterval(()=>{
-      var timeLeft = formatTime(this.state.currentTime)
+      var timeLeft = helpers.formatTime(this.state.currentTime)
       if(this.state.currentTime <=0){
         Sound.enable(true)
         Sound.prepare('ring.mp3')
         Sound.play('ring.mp3')
-        this.state = {
-          timeLeft: '25:00',
-          timeRuning : false,
-          currentTime: 15000
-        }
+        var state = this.state
+        state.counter = state.counter + 1
+        state.timeRuning = false
+        state.currentTime = times[state.counter%2]
+        state.timeLeft = 'jajaj'
+        this.state = state
         currentTime = this.state.currentTime
         return
-      }
-
-      if (this.state.timeRuning != true){
+      } else if (this.state.timeRuning != true){
         this.setState({
           timeLeft: this.state.timeLeft,
           timeRuning : this.state.timeRuning,
@@ -138,7 +116,7 @@ const styles = StyleSheet.create({
   view: {
     flex: 1,
     justifyContent: 'center',
-    alignItems: 'center',
+    alignItems: 'stretch',
     backgroundColor: '#F5FCFF',
   },
   checkList: {
