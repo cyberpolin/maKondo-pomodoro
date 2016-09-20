@@ -23,6 +23,15 @@
                 <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" image="pw_pattern.png" translatesAutoresizingMaskIntoConstraints="NO" id="tvX-OF-UqY">
                     <rect key="frame" x="188" y="376" width="188" height="188"/>
                 </imageView>
+                <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" image="pw_pattern.png" translatesAutoresizingMaskIntoConstraints="NO" id="68w-ra-wKe">
+                    <rect key="frame" x="376" y="377" width="188" height="188"/>
+                </imageView>
+                <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" image="pw_pattern.png" translatesAutoresizingMaskIntoConstraints="NO" id="Exl-v3-rut">
+                    <rect key="frame" x="376" y="189" width="188" height="188"/>
+                </imageView>
+                <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" image="pw_pattern.png" translatesAutoresizingMaskIntoConstraints="NO" id="hdF-oi-xDH">
+                    <rect key="frame" x="376" y="1" width="188" height="188"/>
+                </imageView>
                 <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="A maKondo production" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" minimumFontSize="9" translatesAutoresizingMaskIntoConstraints="NO" id="XXb-b1-MLb">
                     <rect key="frame" x="10" y="401" width="441" height="21"/>
                     <fontDescription key="fontDescription" type="system" pointSize="17"/>
@@ -32,7 +41,7 @@
                 <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" image="pw_pattern.png" translatesAutoresizingMaskIntoConstraints="NO" id="osQ-7j-BPA">
                     <rect key="frame" x="188" y="0.0" width="188" height="188"/>
                 </imageView>
-                <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Pomodoro" textAlignment="center" lineBreakMode="middleTruncation" baselineAdjustment="alignBaselines" minimumFontSize="18" translatesAutoresizingMaskIntoConstraints="NO" id="bz1-cu-bOS">
+                <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="center" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Pomodoro" textAlignment="center" lineBreakMode="middleTruncation" minimumFontSize="18" translatesAutoresizingMaskIntoConstraints="NO" id="bz1-cu-bOS">
                     <rect key="frame" x="20" y="140" width="441" height="43"/>
                     <fontDescription key="fontDescription" type="boldSystem" pointSize="36"/>
                     <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
